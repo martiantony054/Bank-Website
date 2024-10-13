@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Here</title>
+    <link rel="shortcut icon" href="./bank.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="min-h-screen flex flex-col items-center justify-center relative">
+        <div class="absolute inset-0 bg-[url('https://img.freepik.com/free-photo/banking-financial-technology-with-currency-symbols-background_53876-104211.jpg?uid=R107099859&ga=GA1.1.10888339.1721932112&semt=ais_hybrid')] bg-cover bg-center blur-sm"></div>
+        
+        
+        <div class="relative z-10 p-8 rounded-2xl bg-white shadow-2xl">
+            <a href="javascript:void(0)" class="mr-1 text-blue-700 text-3xl font-bold">
+                <img src="./bank.png" alt="logo" class='w-28 inline-block' /> EASY CASH
+            </a>
+            <h2 class="text-gray-800 text-center text-2xl font-semibold ml-5">Login🔑🔑</h2>
+            <div id="successAlert" style="display: none;" class="bg-green-100 text-green-800 p-4 rounded-lg" role="alert">
+                <strong class="font-bold text-sm mr-4">Success!</strong>
+                <span class="block text-sm sm:inline max-sm:mt-2">Logged in successfully!</span>
+            </div>
+            <div id="errorAlert" style="display: none;" class="bg-red-100 text-red-800 p-4 rounded-lg" role="alert">
+                <strong class="font-bold text-sm mr-4">Error!</strong>
+                <span class="block text-sm sm:inline max-sm:mt-2">Please fill in all fields.</span>
+            </div>
+            <div id="errorAlert2" style="display: none;" class="bg-red-100 text-red-800 p-4 rounded-lg" role="alert">
+                <strong class="font-bold text-sm mr-4">Error!</strong>
+                <span class="block text-sm sm:inline max-sm:mt-2">Invalid Credentials</span>
+            </div>
+    
+            <div class="mt-8 space-y-4">
+                <div>
+                    <label class="text-gray-800 text-sm mb-2 block">UserName</label>
+                    <div class="relative flex items-center">
+                        <input name="text" type="text" required id="usrname" class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter UserName" />
+                    </div>
+                </div>
+    
+                <div>
+                    <label class="text-gray-800 text-sm mb-2 block">Password</label>
+                    <div class="relative flex items-center">
+                        <input name="password" type="password" required id="pd" class="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600" placeholder="Enter password" />
+                    </div>
+                </div>
+    
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div class="text-sm"></div>
+                </div>
+    
+                <div class="!mt-8">
+                    <button type="button" class="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none" onclick="sgnin()">
+                        Sign in
+                    </button>
+                </div>
+                <p class="text-gray-800 text-sm !mt-8 text-center">Don't have an account? <a href="./register.html" class="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold">Register here</a></p>
+            </div>
+        </div>
+    </div>
+    <script>
+       function sgnin() {
+            let details = {
+                Uname: usrname.value,
+                pwd: pd.value
+            }
+            if (details.Uname === '' || details.pwd === '') 
+            {
+                document.getElementById('errorAlert').style.display = 'block';
+            } 
+            else 
+            {
+                let a = details.Uname;
+                if (a in localStorage) 
+                {
+                    let c = details.pwd;
+                    let b = JSON.parse(localStorage.getItem(a));
+
+                    if(details.pwd===b.PassWord)
+                    {
+                     document.getElementById('successAlert').style.display = 'block';
+                     setTimeout(() => 
+                     {
+                        window.location = "./trans.html";
+                     }, 2000); 
+                   }
+                   else
+                   {
+                    document.getElementById('errorAlert2').style.display = 'block';
+                   }  
+                }
+                else 
+                {
+                    document.getElementById('errorAlert2').style.display = 'block';
+                    
+                }
+            }
+       }
+    </script>
+</body>
+</html>
